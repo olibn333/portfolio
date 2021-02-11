@@ -1,0 +1,25 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio OBN",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olibn333/portfolio.git"
+  },
+  "author": "Oli BN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olibn333/portfolio/issues"
+  },
+  "homepage": "https://github.com/olibn333/portfolio#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
