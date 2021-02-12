@@ -1,9 +1,10 @@
 import React from 'react'
-import {Typography} from '@material-ui/core'
+import {AppBar, Box, Typography} from '@material-ui/core'
+
 
 const Header = () => {
     return (
-        <Typography>Hello</Typography>
+        <Box className="center">Oliver Belfitt-Nash</Box>
     )
 }
 
