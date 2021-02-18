@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
-import { AppBar, Box, makeStyles, Typography } from '@material-ui/core'
+import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 // import {createNode} from './nodegarden'
+
+const theme = createMuiTheme({
+    typography: {
+      fontFamily: [
+        'Garamond',
+      ].join(','),
+    },
+  });
 
 const useStyles = makeStyles(theme=>({
 
@@ -19,10 +27,12 @@ const useStyles = makeStyles(theme=>({
 
 const App = () => {
     return (
+        <ThemeProvider theme={theme}>
         <Box display="flex" justifyContent="center" className="center">
-            {/* <Typography variant="h1">Oliver Belfitt-Nash</Typography> */}
-            <NameSVG />
+            <Typography variant="h1">Oliver Belfitt-Nash</Typography>
+            {/* <NameSVG /> */}
         </Box>
+        </ThemeProvider>
     )
 }
 
