@@ -21,7 +21,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "text-to-svg": "^3.1.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
