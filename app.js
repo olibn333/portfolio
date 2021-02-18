@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider } from '@material-ui/core'
+import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 // import {createNode} from './nodegarden'
 
@@ -9,6 +9,15 @@ const theme = createMuiTheme({
         'Garamond',
       ].join(','),
     },
+    palette : {
+        type:'dark',
+        primary: {
+            main: 'rgb(255,255,255)'
+        },
+        secondary: {
+            main:'rgb(0,0,0)'
+        }
+    }
   });
 
 const useStyles = makeStyles(theme=>({
@@ -28,12 +37,38 @@ const useStyles = makeStyles(theme=>({
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
+            <TabBar></TabBar>
         <Box display="flex" justifyContent="center" className="center">
             <Typography variant="h1">Oliver Belfitt-Nash</Typography>
             {/* <NameSVG /> */}
         </Box>
         </ThemeProvider>
     )
+}
+
+const TabBar = () => {
+    const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+      <Paper className={classes.opac1}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="Node Garden" />
+        <Tab label="Pavlov Horde" />
+        <Tab label="MVR Power" />
+      </Tabs>
+      </Paper>
+  )
 }
 
 const NameSVG = () => {
