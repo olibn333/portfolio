@@ -1,0 +1,28 @@
+{
+    "projects":[
+        {
+            "name":"MVR Website",
+            "url": "myanmarvr.com"
+        },
+        {
+            "name":"MVR Power Service",
+            "url": "power.myanmarvr.com"
+        },
+        {
+            "name": "Pavlov Horde Website",
+            "url":"pavlovhorde.com"
+        },
+        {
+            "name": "Pavlov Horde Service",
+            "url":"pavlovhorde.com/buy"
+        },
+        {
+            "name": "GLC Website",
+            "url":"glc.myanmarvr.com"
+        },
+        {
+            "name":"Excel Add-Ins",
+            "url":"olibn.com/excel"
+        }
+    ]
+}

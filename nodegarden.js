@@ -1,7 +1,7 @@
 const SCREEN_WIDTH = document.body.clientWidth;
 const SCREEN_HEIGHT = document.body.clientHeight;
 const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
+const context = canvas.getContext('2d',{ alpha: false });
 canvas.width = SCREEN_WIDTH
 canvas.height = SCREEN_HEIGHT
 
@@ -13,12 +13,12 @@ const MIN_DIST = SCREEN_HEIGHT / 5
 const SPRING_AMOUNT = 0.1
 const FRAMERATE = 1000 / 20
 const NODE_RADIUS = SCREEN_HEIGHT / 200
-const MAX_RADIUS = SCREEN_HEIGHT / 50
+const MAX_RADIUS = SCREEN_HEIGHT / 20
 const NEW_NODES_CLICK = 3
 const BOUNCE_FORCE = 0.9
 const RESISTANCE = 0.001
-const GRAVYITY_CONSTANT = -0.001
-const MAX_VEL = 5
+const GRAVYITY_CONSTANT = -0.0005
+const MAX_VEL = 2
 const SPAWN_DIST = SCREEN_HEIGHT / 10
 
 
@@ -61,33 +61,40 @@ function nodes_init() {
       const subTotalX = Array.from(titleText).slice(0,i).reduce((acc,char)=>context.measureText(char).width+acc,0)
       const offsetX = subTotalX + context.measureText(char).width / 2
       const charX = centerX - lineX + offsetX
-      createNode(charX,centerY,`255, 255, 255`,3)
+      const thisColor = `255, 255, 255`
+      createNode(charX,centerY,thisColor,3)
+      // explosions.push(new explosion(charX,centerY,5,5,thisColor))
     })
 
     } else {
       const color = `255, 255, 255`
-    const radius = Math.random() * MAX_RADIUS
+    const radius = Math.floor(Math.random() * MAX_RADIUS)
     const thisNewNodes = 5
-      createNode(e.clientX, e.clientY, color, radius)
-      createNode(e.clientX, e.clientY + SPAWN_DIST, color, radius)
-      createNode(e.clientX + SPAWN_DIST, e.clientY, color, radius)
-      createNode(e.clientX - SPAWN_DIST, e.clientY, color, radius)
-      createNode(e.clientX, e.clientY - SPAWN_DIST, color, radius)
+      createNode(Math.floor(e.clientX), Math.floor(e.clientY), color, radius)
+      createNode(Math.floor(e.clientX), Math.floor(e.clientY) + SPAWN_DIST, color, radius)
+      createNode(Math.floor(e.clientX) + SPAWN_DIST, Math.floor(e.clientY), color, radius)
+      createNode(Math.floor(e.clientX) - SPAWN_DIST, Math.floor(e.clientY), color, radius)
+      createNode(Math.floor(e.clientX), Math.floor(e.clientY) - SPAWN_DIST, color, radius)
+     
 
     }
 
     clicked = true
   })
+  drawFrame()
 
-  setInterval(drawFrame, FRAMERATE);
 }
 
 function drawFrame(){
+  
   nodes_loop()
+  
   drawExplosion()
   if (!clicked){
   drawText(titleText)
   }
+  
+window.requestAnimationFrame(drawFrame)
 }
 
 function drawText(text){
@@ -138,8 +145,8 @@ function createNodes() {
     var node = {
       color:`255,255,255`,
       radius: NODE_RADIUS,
-      x: Math.round(Math.random() * SCREEN_WIDTH),
-      y: Math.round(Math.random() * SCREEN_HEIGHT),
+      x: Math.floor(Math.random() * SCREEN_WIDTH),
+      y: Math.floor(Math.random() * SCREEN_HEIGHT),
       vx: Math.random() * 6 - 3,
       vy: Math.random() * 6 - 3,
       update: function () {
@@ -301,14 +308,14 @@ function drawExplosion() {
       return;
     }
 
-    const particlesAfterRemoval = particles.slice();
+    let particlesAfterRemoval = particles.slice();
     for (let ii = 0; ii < particles.length; ii++) {
 
       const particle = particles[ii];
 
       // Check particle size
       // If 0, remove
-      if (particle.size <= 0.5) {
+      if (particle.size <= 1) {
         particlesAfterRemoval.splice(ii, 1);
         continue;
       }
@@ -320,9 +327,9 @@ function drawExplosion() {
       context.fill();
 
       // Update
-      particle.x += particle.xv;
-      particle.y += particle.yv;
-      particle.size -= particle.size*PARTICLE_EROSION;
+      particle.x += Math.floor(particle.xv);
+      particle.y += Math.floor(particle.yv);
+      particle.size -= 0.2;
     }
 
     explosion.particles = particlesAfterRemoval;
