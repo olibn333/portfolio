@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper } from '@material-ui/core'
+import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 // import {createNode} from './nodegarden'
 
@@ -39,10 +39,15 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <TabBar></TabBar>
         <Box display="flex" justifyContent="center" className="center">
-            <Typography variant="h1">Oliver Belfitt-Nash</Typography>
-            {/* <NameSVG /> */}
+            <SpawnProjects/>
         </Box>
         </ThemeProvider>
+    )
+}
+
+const SpawnProjects = () => {
+    return (
+        <Button>Projects</Button>
     )
 }
 

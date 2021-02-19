@@ -19,7 +19,7 @@ const BOUNCE_FORCE = 0.9
 const RESISTANCE = 0.001
 const GRAVYITY_CONSTANT = -0.001
 const MAX_VEL = 5
-const SPAWN_DIST = 50
+const SPAWN_DIST = SCREEN_HEIGHT / 10
 
 
 // Explosion Options
@@ -34,6 +34,9 @@ const particlesMinSize      = 1;
 const particlesMaxSize      = 2;
 let explosions            = [];
 
+let clicked = false
+
+const titleText = 'Oliver Belfitt-Nash'
 
 nodes_init();
 
@@ -44,20 +47,36 @@ function nodes_init() {
     nodes[i].draw();
   }
   document.addEventListener('click', (e) => {
-    const color = `255, 255, 255`
-    const radius = Math.random() * MAX_RADIUS
-    const thisNewNodes = 5
-    // for (let i = 0; i < thisNewNodes; i++) {
-      createNode(e.clientX + SPAWN_DIST, e.clientY, color, radius)
-      createNode(e.clientX, e.clientY + SPAWN_DIST, color, radius)
-      createNode(e.clientX + SPAWN_DIST, e.clientY + SPAWN_DIST, color, radius)
-      createNode(e.clientX - SPAWN_DIST, e.clientY, color, radius)
-      createNode(e.clientX, e.clientY - SPAWN_DIST, color, radius)
-      createNode(e.clientX - SPAWN_DIST, e.clientY - SPAWN_DIST, color, radius)
-    // }
+    
+    
     if (nodes.length > MAX_NODES) {
       nodes = nodes.slice(-30)
     }
+
+    if (!clicked)  {
+    Array.from(titleText).map((char,i)=>{
+      const centerX = canvas.width/2
+      const centerY = canvas.height/2
+      const lineX = context.measureText(titleText).width / 2
+      const subTotalX = Array.from(titleText).slice(0,i).reduce((acc,char)=>context.measureText(char).width+acc,0)
+      const offsetX = subTotalX + context.measureText(char).width / 2
+      const charX = centerX - lineX + offsetX
+      createNode(charX,centerY,`255, 255, 255`,3)
+    })
+
+    } else {
+      const color = `255, 255, 255`
+    const radius = Math.random() * MAX_RADIUS
+    const thisNewNodes = 5
+      createNode(e.clientX, e.clientY, color, radius)
+      createNode(e.clientX, e.clientY + SPAWN_DIST, color, radius)
+      createNode(e.clientX + SPAWN_DIST, e.clientY, color, radius)
+      createNode(e.clientX - SPAWN_DIST, e.clientY, color, radius)
+      createNode(e.clientX, e.clientY - SPAWN_DIST, color, radius)
+
+    }
+
+    clicked = true
   })
 
   setInterval(drawFrame, FRAMERATE);
@@ -66,6 +85,18 @@ function nodes_init() {
 function drawFrame(){
   nodes_loop()
   drawExplosion()
+  if (!clicked){
+  drawText(titleText)
+  }
+}
+
+function drawText(text){
+  
+  context.font = '48px Garamond';
+  context.textAlign = 'center'
+  context.textBaseline = 'middle'
+  context.fillText(text, canvas.width/2, canvas.height/2);
+
 }
 
 function createNode(x, y, rgb, radius) {
@@ -183,7 +214,7 @@ function nodes_loop() {
           // const thisParticleSize = Math.floor(Math.max(smallerArea / (gravityPull*REL_PARTICLE_SIZE),5))
           // const thisParticleCount = Math.floor(Math.max(smallerArea/thisParticleSize,3))
           const thisParticleCount = 10
-          const thisParticleSize = 5
+          const thisParticleSize = smallerNode.radius*1.5
           const thisColor = smallerNode.color
           // console.log('Explode Particles:', thisParticleCount, 'Size:', thisParticleSize, 'Color:',smallerNode.color)
           explosions.push(
@@ -199,7 +230,7 @@ function nodes_loop() {
           // const thisParticleSize = Math.floor(Math.max(smallerArea / (gravityPull*REL_PARTICLE_SIZE),5)/2)
           // const thisParticleCount = Math.floor(Math.max(smallerArea/thisParticleSize,3)/2)
           const thisParticleCount = 5
-          const thisParticleSize = 5
+          const thisParticleSize = smallerNode.radius*1.5
           const thisColor = `255, 255, 255`
           explosions.push(
             new explosion(smallerNode.x, smallerNode.y, thisParticleCount , thisParticleSize, thisColor)
