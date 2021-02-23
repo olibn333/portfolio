@@ -1,18 +1,14 @@
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
 body { 
   background-color: #000;
   margin: 0;
   padding: 0;
   overflow: hidden;
   color: white;
-}
-
-.center{
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
 }
 
 #container {

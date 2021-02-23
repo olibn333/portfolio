@@ -2,27 +2,39 @@
     "projects":[
         {
             "name":"MVR Website",
-            "url": "myanmarvr.com"
+            "url": "myanmarvr.com",
+            "description":"Promotional base for Myanmar Virtual Reality advisory & creative business",
+            "keywords":"JavaScript, HTML, CSS, Parallax, VR"
         },
         {
             "name":"MVR Power Service",
-            "url": "power.myanmarvr.com"
+            "url": "myanmarvr.com",
+            "description":"Android App and Web dashboard to view Live Power Cuts in Yangon, Myanmar. Revenue $110/month.",
+            "keywords":"Java, Android, PHP, JavaScript"
         },
         {
             "name": "Pavlov Horde Website",
-            "url":"pavlovhorde.com"
+            "url":"pavlovhorde.com",
+            "description":"Web app for creating, managing and viewing servers for Pavlov VR Shack (Quest)",
+            "keywords":"React, Node, Express API, Quest, Pavlov VR"
         },
         {
             "name": "Pavlov Horde Service",
-            "url":"pavlovhorde.com/buy"
+            "url":"pavlovhorde.com/buy",
+            "description":"Buy Pavlov Horde VR Servers, automated setup and installation. Managed from website. Revenue $250/month.",
+            "keywords":"Express API, Node, VULTR, Linux Bash, Pavlov VR"
         },
         {
             "name": "GLC Website",
-            "url":"glc.myanmarvr.com"
+            "url":"glc.myanmarvr.com",
+            "description":"Promotional Website for GLC Social Club",
+            "keywords":"SVG, JavaScript, HTML, CSS"
         },
         {
             "name":"Excel Add-Ins",
-            "url":"olibn.com/excel"
+            "url":"olibn.com/excel",
+            "description":"Customised Excel Add-Ins, auto-updating across a client base of 37 customers",
+            "keywords":"VBA, Git, Excel"
         }
     ]
 }
