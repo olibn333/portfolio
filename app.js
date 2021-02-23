@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 import * as projectsList from './projects.json'
-// import {createNode} from './nodegarden'
+
+// projectsList.projects.splice(4,0,[])
 
 const theme = createMuiTheme({
     typography: {
@@ -22,15 +23,11 @@ const theme = createMuiTheme({
 });
 
 const useStyles = makeStyles(theme => ({
-
-    mySVG: {
-        height: '100%',
-        width: '100%',
-        fill: 'white',
-    },
-    mySVGPath: {
-        transition: '2s',
-        transform: 'translate(27%,43%)'
+    header: {
+        '& div': {
+            opacity: '80%',
+            position: 'absolute'
+        }
     }
 }))
 
@@ -38,24 +35,80 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
+            
             <TabBar></TabBar>
-            <Box display="flex" justifyContent="center" className="center">
-                <SpawnProjects />
+            <Box display="flex" height="100%" alignContent="center" alignItems="center" justifyContent="center">
+            <ProjectSpace/>
             </Box>
         </ThemeProvider>
     )
 }
 
-const SpawnProjects = () => {
+const ProjectSpace = () =>{
+    
+    const [clicked, setClicked] = useState(false)
+
+    const handleClick = () => {
+        setClicked(true)
+    }
 
     return (
-        <Grid justify="space-between" container direction="row" spacing={10}>
-            {projectsList.projects.map(p => (
-                <Grid justify="center" item xs={5}>
-                    <Button variant="outlined">{p.name}</Button>
+        <Box display="flex">
+            
+        {clicked ?
+            <SpawnProjects />
+            : <Button onClick={handleClick}>Enter</Button>
+            
+        }
+        </Box>
+    )
+}
+
+const SpawnProjects = () => {
+    const classes = useStyles()
+
+    const [show, isShow] = useState(false)
+
+    useEffect(()=>{
+        isShow(true)
+    })
+    return (
+        
+        <Fade in={show}>
+        <Box display="flex" height="100vh">
+            {[0, 1].map(x => (
+                <Grid key={x} justify="space-between" container direction="row" alignItems="center" justify="center" spacing={0}>
+                    {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
+                        p.name &&
+                        <Grid key={p.name} item xs={12}>
+                            <ProjectBox project={p} />
+                        </Grid>
+                    ))
+                    }
+
                 </Grid>
             ))}
-        </Grid>
+
+        </Box>
+        </Fade>
+
+
+    )
+}
+
+const ProjectBox = ({ project }) => {
+    const classes = useStyles()
+
+    return (
+    <Box textAlign="center" className={classes.fadeIn}>
+        <Button variant="outlined">
+            <Box>
+            <Typography variant="h6">{project.name}</Typography>
+            <Typography variant="body2">{project.description}</Typography>
+            </Box>  
+        </Button>
+
+    </Box>
     )
 }
 
@@ -68,18 +121,20 @@ const TabBar = () => {
     };
 
     return (
-        <Paper className={classes.opac1}>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                centered
-            >
-                <Tab label="Projects" />
-                <Tab label="Contact" />
-            </Tabs>
-        </Paper>
+        <Box >
+            <Paper >
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    centered
+                >
+                    <Tab label="Projects" />
+                    <Tab label="Contact" />
+                </Tabs>
+            </Paper>
+        </Box>
     )
 }
 
