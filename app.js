@@ -28,6 +28,16 @@ const useStyles = makeStyles(theme => ({
             opacity: '80%',
             position: 'absolute'
         }
+    },
+    gridCol : {
+        maxWidth:'45vw'
+    },
+    projectTxt:{
+        textTransform:'none',
+        textJustify: 'auto'
+    },
+    projectImg:{
+        height:'5em',
     }
 }))
 
@@ -37,7 +47,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             
             <TabBar></TabBar>
-            <Box display="flex" height="100%" alignContent="center" alignItems="center" justifyContent="center">
+            <Box height="80%" display="flex" alignContent="center" alignItems="center" justifyContent="center">
             <ProjectSpace/>
             </Box>
         </ThemeProvider>
@@ -53,11 +63,13 @@ const ProjectSpace = () =>{
     }
 
     return (
-        <Box display="flex">
+        <Box display="flex" pt={2}>
             
         {clicked ?
-            <SpawnProjects />
-            : <Button onClick={handleClick}>Enter</Button>
+            
+             
+           <SpawnProjects />
+           : <Box flex pt={10}><Button onClick={handleClick}>Enter</Button></Box>
             
         }
         </Box>
@@ -69,19 +81,25 @@ const SpawnProjects = () => {
 
     const [show, isShow] = useState(false)
 
+    const showButtonClick = (project) =>{
+        console.log(project)
+    }
+
     useEffect(()=>{
         isShow(true)
     })
+
+
     return (
         
         <Fade in={show}>
-        <Box display="flex" height="100vh">
+        <Box display="flex" >
             {[0, 1].map(x => (
-                <Grid key={x} justify="space-between" container direction="row" alignItems="center" justify="center" spacing={0}>
+                <Grid  key={x} justify="space-between" container direction="row" justify="center" spacing={2}>
                     {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
                         p.name &&
-                        <Grid key={p.name} item xs={12}>
-                            <ProjectBox project={p} />
+                        <Grid className={classes.gridCol} key={p.name} item xs={12}>
+                            <ProjectBox showButtonClick={()=>showButtonClick(p)} project={p} />
                         </Grid>
                     ))
                     }
@@ -96,15 +114,16 @@ const SpawnProjects = () => {
     )
 }
 
-const ProjectBox = ({ project }) => {
+const ProjectBox = ({ project, showButtonClick }) => {
     const classes = useStyles()
 
     return (
-    <Box textAlign="center" className={classes.fadeIn}>
-        <Button variant="outlined">
+    <Box textAlign="center">
+        <Button onClick={showButtonClick} variant="outlined">
             <Box>
-            <Typography variant="h6">{project.name}</Typography>
-            <Typography variant="body2">{project.description}</Typography>
+                <img className={classes.projectImg} src={project.logo}></img>
+            <Typography className={classes.projectTxt} variant="h6">{project.name}</Typography>
+            <Typography className={classes.projectTxt} variant="body2">{project.description}</Typography>
             </Box>  
         </Button>
 

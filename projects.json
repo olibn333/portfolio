@@ -4,13 +4,15 @@
             "name":"MVR Website",
             "url": "myanmarvr.com",
             "description":"Promotional base for Myanmar Virtual Reality advisory & creative business",
-            "keywords":"JavaScript, HTML, CSS, Parallax, VR"
+            "keywords":"JavaScript, HTML, CSS, Parallax, VR",
+            "logo":"http://myanmarvr.com/img/demo/_small/ThroughthelensVRMyanmar.jpg"
         },
         {
             "name":"MVR Power Service",
             "url": "myanmarvr.com",
-            "description":"Android App and Web dashboard to view Live Power Cuts in Yangon, Myanmar. Revenue $110/month.",
-            "keywords":"Java, Android, PHP, JavaScript"
+            "description":"Android App and Web dashboard to view Live Power Cuts in Yangon, Myanmar.\nRevenue $110/month.",
+            "keywords":"Java, Android, PHP, JavaScript",
+            "logo":"http://myanmarvr.com/img/MVR%20Logo.png"
         },
         {
             "name": "Pavlov Horde Website",
@@ -21,7 +23,7 @@
         {
             "name": "Pavlov Horde Service",
             "url":"pavlovhorde.com/buy",
-            "description":"Buy Pavlov Horde VR Servers, automated setup and installation. Managed from website. Revenue $250/month.",
+            "description":"Buy Pavlov Horde VR Servers, automated setup and installation. Managed from website.\nRevenue $250/month.",
             "keywords":"Express API, Node, VULTR, Linux Bash, Pavlov VR"
         },
         {

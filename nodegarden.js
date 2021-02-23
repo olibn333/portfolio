@@ -24,10 +24,10 @@ const SPAWN_DIST = SCREEN_HEIGHT / 10
 
 // Explosion Options
 
-const REL_PARTICLE_SIZE = 50
+const REL_PARTICLE_SIZE = 30
 const REL_PARTICLE_COUNT = 1.5
 const PARTICLE_EROSION = 0.1
-const particlesPerExplosion = 10;
+const particlesPerExplosion = 5;
 const particlesMinSpeed     = 3;
 const particlesMaxSpeed     = 6;
 const particlesMinSize      = 1;
