@@ -1,11 +1,40 @@
 {
     "projects":[
+        
+        {
+            "name": "Pavlov Horde Website",
+            "url":"pavlovhorde.com",
+            "description":"Web app for creating, managing and viewing servers for Pavlov VR Shack (Quest)",
+            "keywords":"React, Node, Express API, Quest, Pavlov VR",
+            "logo":"https://pavlovhorde.com/static/PHorde2-0f28d87f6d78c882bb2061c2ab9d5f67.png"
+        },
+        {
+            "name": "Pavlov Horde Service",
+            "url":"pavlovhorde.com/buy",
+            "description":"Buy Pavlov Horde VR Servers, automated setup and installation. Managed from website.\nRevenue $250/month.",
+            "keywords":"Express API, Node, VULTR, Linux Bash, Pavlov VR",
+            "logo":"https://pavlovhorde.com/static/PHorde3gold-1eb6238d469aa4769a8e0bce07300eab.png"
+        },
+        {
+            "name": "Portfolio Website",
+            "url":"olibn.com",
+            "description":"This Portfolio Website",
+            "keywords":"React, Material UI, Canvas, JavaScript, HTML, CSS",
+            "logo":"OBN"
+        },
+        {
+            "name":"Corporate Client API Integrations",
+            "url":"olibn.com/excel",
+            "description":"Customised Excel Add-Ins and Node JS Express APIs, auto-updating across a client base of 37 corporate customers",
+            "keywords":"Node, Express, Git, VBA, Excel",
+            "logo":"https://upload.wikimedia.org/wikipedia/commons/d/da/Microsoft_Excel_2013_logo_with_background.png"
+        },
         {
             "name":"MVR Website",
             "url": "myanmarvr.com",
             "description":"Promotional base for Myanmar Virtual Reality advisory & creative business",
             "keywords":"JavaScript, HTML, CSS, Parallax, VR",
-            "logo":"http://myanmarvr.com/img/demo/_small/ThroughthelensVRMyanmar.jpg"
+            "logo":"MVRWebsite"
         },
         {
             "name":"MVR Power Service",
@@ -13,30 +42,6 @@
             "description":"Android App and Web dashboard to view Live Power Cuts in Yangon, Myanmar.\nRevenue $110/month.",
             "keywords":"Java, Android, PHP, JavaScript",
             "logo":"http://myanmarvr.com/img/MVR%20Logo.png"
-        },
-        {
-            "name": "Pavlov Horde Website",
-            "url":"pavlovhorde.com",
-            "description":"Web app for creating, managing and viewing servers for Pavlov VR Shack (Quest)",
-            "keywords":"React, Node, Express API, Quest, Pavlov VR"
-        },
-        {
-            "name": "Pavlov Horde Service",
-            "url":"pavlovhorde.com/buy",
-            "description":"Buy Pavlov Horde VR Servers, automated setup and installation. Managed from website.\nRevenue $250/month.",
-            "keywords":"Express API, Node, VULTR, Linux Bash, Pavlov VR"
-        },
-        {
-            "name": "GLC Website",
-            "url":"glc.myanmarvr.com",
-            "description":"Promotional Website for GLC Social Club",
-            "keywords":"SVG, JavaScript, HTML, CSS"
-        },
-        {
-            "name":"Excel Add-Ins",
-            "url":"olibn.com/excel",
-            "description":"Customised Excel Add-Ins, auto-updating across a client base of 37 customers",
-            "keywords":"VBA, Git, Excel"
         }
     ]
 }
