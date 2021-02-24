@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 import * as projectsList from './projects.json'
+import OBN from './img/OBN.png'
+import MVRWebsite from './img/MVRWebsite.png'
+
+const logos = {OBN, MVRWebsite}
 
 // projectsList.projects.splice(4,0,[])
 
@@ -30,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     gridCol : {
-        maxWidth:'45vw'
+        maxWidth:'40vw',
     },
     projectTxt:{
         textTransform:'none',
@@ -80,6 +84,7 @@ const SpawnProjects = () => {
     const classes = useStyles()
 
     const [show, isShow] = useState(false)
+    const [modal, setModal] = useState()
 
     const showButtonClick = (project) =>{
         console.log(project)
@@ -116,19 +121,34 @@ const SpawnProjects = () => {
 
 const ProjectBox = ({ project, showButtonClick }) => {
     const classes = useStyles()
+    let thisImg = ''
+
+    try {
+        if (project.logo.indexOf('http')>-1) {
+            thisImg = project.logo
+        } else {
+            thisImg = logos[project.logo]
+        }
+    } catch (e) {
+        thisImg = project.logo
+    }
 
     return (
-    <Box textAlign="center">
+    <Box textAlign="center" className={classes.projectBox}>
         <Button onClick={showButtonClick} variant="outlined">
             <Box>
-                <img className={classes.projectImg} src={project.logo}></img>
+                <img className={classes.projectImg} src={thisImg}></img>
             <Typography className={classes.projectTxt} variant="h6">{project.name}</Typography>
-            <Typography className={classes.projectTxt} variant="body2">{project.description}</Typography>
+            <Typography className={classes.projectTxt} variant="caption">{project.keywords}</Typography>
             </Box>  
         </Button>
 
     </Box>
     )
+}
+
+const ProjectModal = () =>{
+
 }
 
 const TabBar = () => {
