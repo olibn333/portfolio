@@ -20,6 +20,8 @@
   "homepage": "https://github.com/olibn333/portfolio#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@types/react": "^17.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "text-to-svg": "^3.1.5"

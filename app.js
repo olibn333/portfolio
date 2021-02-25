@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade } from '@material-ui/core'
+import { Dialog, DialogTitle, AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade, Link, DialogContent, IconButton, List, ListItem } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 import * as projectsList from './projects.json'
 import OBN from './img/OBN.png'
 import MVRWebsite from './img/MVRWebsite.png'
+import { GitHub } from '@material-ui/icons'
+import CloseIcon from '@material-ui/icons/Close';
+import LinkIcon from '@material-ui/icons/Link';
 
-const logos = {OBN, MVRWebsite}
+const logos = { OBN, MVRWebsite }
 
 // projectsList.projects.splice(4,0,[])
 
@@ -33,15 +36,21 @@ const useStyles = makeStyles(theme => ({
             position: 'absolute'
         }
     },
-    gridCol : {
-        maxWidth:'40vw',
+    gridCol: {
+        maxWidth: '40vw',
     },
-    projectTxt:{
-        textTransform:'none',
+    projectTxt: {
+        textTransform: 'none',
         textJustify: 'auto'
     },
-    projectImg:{
-        height:'5em',
+    projectImg: {
+        height: '5em',
+    },
+    titleBox: {
+        backgroundColor: 'grey'
+    },
+    closeButton: {
+        float: 'right'
     }
 }))
 
@@ -49,17 +58,16 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
-            
             <TabBar></TabBar>
             <Box height="80%" display="flex" alignContent="center" alignItems="center" justifyContent="center">
-            <ProjectSpace/>
+                <ProjectSpace />
             </Box>
         </ThemeProvider>
     )
 }
 
-const ProjectSpace = () =>{
-    
+const ProjectSpace = () => {
+
     const [clicked, setClicked] = useState(false)
 
     const handleClick = () => {
@@ -67,15 +75,15 @@ const ProjectSpace = () =>{
     }
 
     return (
-        <Box display="flex" pt={2}>
-            
-        {clicked ?
-            
-             
-           <SpawnProjects />
-           : <Box flex pt={10}><Button onClick={handleClick}>Enter</Button></Box>
-            
-        }
+        <Box pt={2}>
+
+            {clicked ?
+
+
+                <SpawnProjects />
+                : <Box display="flex" pt={10}><Button onClick={handleClick}>Enter</Button></Box>
+
+            }
         </Box>
     )
 }
@@ -86,33 +94,40 @@ const SpawnProjects = () => {
     const [show, isShow] = useState(false)
     const [modal, setModal] = useState()
 
-    const showButtonClick = (project) =>{
-        console.log(project)
+    const handleCloseModal = () => {
+        setModal()
     }
 
-    useEffect(()=>{
+    const showButtonClick = (project) => {
+        setModal(project)
+    }
+
+    useEffect(() => {
         isShow(true)
     })
 
 
     return (
-        
+
         <Fade in={show}>
-        <Box display="flex" >
-            {[0, 1].map(x => (
-                <Grid  key={x} justify="space-between" container direction="row" justify="center" spacing={2}>
-                    {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
-                        p.name &&
-                        <Grid className={classes.gridCol} key={p.name} item xs={12}>
-                            <ProjectBox showButtonClick={()=>showButtonClick(p)} project={p} />
-                        </Grid>
-                    ))
-                    }
+            <Box display="flex" >
+                {[0, 1].map(x => (
+                    <Grid key={x} justify="space-between" container direction="row" justify="center" spacing={2}>
+                        {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
+                            p.name &&
+                            <Grid className={classes.gridCol} key={p.name} item xs={12}>
+                                <ProjectBox showButtonClick={() => showButtonClick(p)} project={p} />
 
-                </Grid>
-            ))}
+                            </Grid>
+                        ))
+                        }
 
-        </Box>
+                    </Grid>
+                ))}
+
+                {modal && <ProjectModal project={modal} handleClose={handleCloseModal} />}
+
+            </Box>
         </Fade>
 
 
@@ -124,7 +139,7 @@ const ProjectBox = ({ project, showButtonClick }) => {
     let thisImg = ''
 
     try {
-        if (project.logo.indexOf('http')>-1) {
+        if (project.logo.indexOf('http') > -1) {
             thisImg = project.logo
         } else {
             thisImg = logos[project.logo]
@@ -134,21 +149,55 @@ const ProjectBox = ({ project, showButtonClick }) => {
     }
 
     return (
-    <Box textAlign="center" className={classes.projectBox}>
-        <Button onClick={showButtonClick} variant="outlined">
-            <Box>
-                <img className={classes.projectImg} src={thisImg}></img>
-            <Typography className={classes.projectTxt} variant="h6">{project.name}</Typography>
-            <Typography className={classes.projectTxt} variant="caption">{project.keywords}</Typography>
-            </Box>  
-        </Button>
+        <Box textAlign="center" className={classes.projectBox}>
+            <Button onClick={showButtonClick} variant="outlined">
+                <Box>
+                    <img className={classes.projectImg} src={thisImg}></img>
+                    <Typography className={classes.projectTxt} variant="h6">{project.name}</Typography>
+                    <Typography className={classes.projectTxt} variant="caption">{project.keywords}</Typography>
+                </Box>
+            </Button>
 
-    </Box>
+        </Box>
     )
 }
 
-const ProjectModal = () =>{
+const ProjectModal = ({ project, handleClose }) => {
 
+    const classes = useStyles()
+
+    return (
+        <Dialog open={!!project} onClose={handleClose}>
+            <DialogTitle className={classes.titleBox} id="simple-dialog-title">
+                {project.name}
+                <IconButton className={classes.closeButton} size="small" color="inherit" onClick={handleClose} aria-label="close">
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent>
+                <List>
+                    <ListItem>
+                        <Typography>{project.description}</Typography>
+                    </ListItem>
+                    <ListItem>
+                        <Typography>Keywords: {project.keywords}</Typography>
+                    </ListItem>
+                    <ListItem>
+                        <LinkIcon />
+
+                        <Link href={project.url}>{project.url}</Link>
+
+                    </ListItem>
+                    <ListItem>
+                        <GitHub />
+
+                        <Link href={project.gitUrl}>{project.gitUrl}</Link>
+
+                    </ListItem>
+                </List>
+            </DialogContent>
+        </Dialog>
+    )
 }
 
 const TabBar = () => {

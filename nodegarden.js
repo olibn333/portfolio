@@ -62,8 +62,9 @@ function nodes_init() {
       const offsetX = subTotalX + context.measureText(char).width / 2
       const charX = centerX - lineX + offsetX
       const thisColor = `255, 255, 255`
-      createNode(charX,centerY,thisColor,3)
-      // explosions.push(new explosion(charX,centerY,5,5,thisColor))
+      
+      explosions.push(new explosion(charX,centerY,5,10,thisColor))
+      if (i%3==0) createNode(charX,centerY,thisColor,8)
     })
 
     } else {
