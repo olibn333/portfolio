@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Dialog, DialogTitle, AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade, Link, DialogContent, IconButton, List, ListItem } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 import * as projectsList from './projects.json'
-import OBN from './img/OBN.png'
-import MVRWebsite from './img/MVRWebsite.png'
-import { GitHub } from '@material-ui/icons'
+import { Email, GitHub } from '@material-ui/icons'
 import CloseIcon from '@material-ui/icons/Close';
 import LinkIcon from '@material-ui/icons/Link';
 
-const logos = { OBN, MVRWebsite }
+
+import OBN from './img/OBN.png'
+import MVRWebsite from './img/MVRWebsite.png'
+import OngoLogo from './img/Ongo.png'
+import shotHorde1 from './img/shot-Horde.png'
+import shotHorde2 from './img/shot-Horde2.png'
+import shotMVRPower from './img/shot-MVRPower.png'
+import shotMVRWeb from './img/shot-MVRWeb.png'
+import shotPortfolio from './img/shot-Portfolio.png'
+import shotAddin from './img/shot-Addin.png'
+
+const logos = { OBN, MVRWebsite, shotHorde1, shotHorde2, shotMVRPower, shotMVRWeb, shotPortfolio, shotAddin, OngoLogo }
 
 // projectsList.projects.splice(4,0,[])
 
@@ -38,6 +47,7 @@ const useStyles = makeStyles(theme => ({
     },
     gridCol: {
         maxWidth: '40vw',
+        alignSelf: 'center'
     },
     projectTxt: {
         textTransform: 'none',
@@ -51,6 +61,9 @@ const useStyles = makeStyles(theme => ({
     },
     closeButton: {
         float: 'right'
+    },
+    shotImg: {
+        height: '10em'
     }
 }))
 
@@ -59,7 +72,7 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <TabBar></TabBar>
-            <Box height="80%" display="flex" alignContent="center" alignItems="center" justifyContent="center">
+            <Box height="100%" display="flex" alignContent="center" alignItems="center" justifyContent="center">
                 <ProjectSpace />
             </Box>
         </ThemeProvider>
@@ -81,9 +94,17 @@ const ProjectSpace = () => {
 
 
                 <SpawnProjects />
-                : <Box display="flex" pt={10}><Button onClick={handleClick}>Enter</Button></Box>
+                : <Welcome handleClick={handleClick} />
 
             }
+        </Box>
+    )
+}
+
+const Welcome = ({ handleClick }) => {
+    return (
+        <Box display="flex" pt={5}>
+            <Button onClick={handleClick}>Enter</Button>
         </Box>
     )
 }
@@ -110,7 +131,7 @@ const SpawnProjects = () => {
     return (
 
         <Fade in={show}>
-            <Box display="flex" >
+            <Box height="80%" display="flex" >
                 {[0, 1].map(x => (
                     <Grid key={x} justify="space-between" container direction="row" justify="center" spacing={2}>
                         {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
@@ -166,6 +187,18 @@ const ProjectModal = ({ project, handleClose }) => {
 
     const classes = useStyles()
 
+    let shotImg = ''
+
+    try {
+        if (project.shot.indexOf('http') > -1) {
+            shotImg = project.shot
+        } else {
+            shotImg = logos[project.shot]
+        }
+    } catch (e) {
+        shotImg = project.shot
+    }
+
     return (
         <Dialog open={!!project} onClose={handleClose}>
             <DialogTitle className={classes.titleBox} id="simple-dialog-title">
@@ -175,6 +208,10 @@ const ProjectModal = ({ project, handleClose }) => {
                 </IconButton>
             </DialogTitle>
             <DialogContent>
+
+                <Box display="flex" justifyContent="center">
+                    <img className={classes.shotImg} src={shotImg}></img>
+                </Box>
                 <List>
                     <ListItem>
                         <Typography>{project.description}</Typography>
@@ -184,15 +221,15 @@ const ProjectModal = ({ project, handleClose }) => {
                     </ListItem>
                     <ListItem>
                         <LinkIcon />
-
-                        <Link href={project.url}>{project.url}</Link>
-
+                        <Box pl={2}>
+                            <Link href={project.url}>{project.url}</Link>
+                        </Box>
                     </ListItem>
                     <ListItem>
                         <GitHub />
-
-                        <Link href={project.gitUrl}>{project.gitUrl}</Link>
-
+                        <Box pl={2}>
+                            <Link href={project.gitUrl}>{project.gitUrl}</Link>
+                        </Box>
                     </ListItem>
                 </List>
             </DialogContent>
@@ -208,6 +245,10 @@ const TabBar = () => {
         setValue(newValue);
     };
 
+    const handleClose = () => {
+        setValue(0)
+    }
+
     return (
         <Box >
             <Paper >
@@ -222,6 +263,19 @@ const TabBar = () => {
                     <Tab label="Contact" />
                 </Tabs>
             </Paper>
+            <Dialog open={!!(value == 1)} onClose={handleClose}>
+                <DialogTitle>Contact</DialogTitle>
+                <DialogContent>
+                    <List>
+                        <ListItem>
+                            <Email />
+                            <Typography>
+                                Oliver Belfitt-Nash
+                            </Typography>
+                        </ListItem>
+                    </List>
+                </DialogContent>
+            </Dialog>
         </Box>
     )
 }
