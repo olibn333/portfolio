@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dialog, DialogTitle, AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade, Link, DialogContent, IconButton, List, ListItem } from '@material-ui/core'
-import * as mySVGJSON from './svg.json'
+import { Dialog, DialogTitle, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade, Link, DialogContent, IconButton, List, ListItem } from '@material-ui/core'
 import * as projectsList from './projects.json'
 import { Email, GitHub, Person } from '@material-ui/icons'
 import CloseIcon from '@material-ui/icons/Close';
@@ -38,7 +37,7 @@ const theme = createMuiTheme({
     }
 });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     header: {
         '& div': {
             opacity: '80%',
@@ -133,7 +132,7 @@ const SpawnProjects = () => {
         <Fade in={show}>
             <Box height="80%" display="flex" >
                 {[0, 1].map(x => (
-                    <Grid key={x} justify="space-between" container direction="row" justify="center" spacing={2}>
+                    <Grid key={x} ontainer direction="row" justify="center" spacing={2}>
                         {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
                             p.name &&
                             <Grid className={classes.gridCol} key={p.name} item xs={12}>
@@ -238,7 +237,6 @@ const ProjectModal = ({ project, handleClose }) => {
 }
 
 const TabBar = () => {
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -296,57 +294,5 @@ const TabBar = () => {
     )
 }
 
-const NameSVG = () => {
-    const classes = useStyles()
-
-    const [myPath, setPath] = useState(mySVGJSON.path)
-    const [clicked, setClicked] = useState(false)
-
-    const svgClick = () => {
-        if (!clicked) {
-
-            const numRegex = /[0-9]/gm
-            const MRegex = /(M[^A-Z]*)/gm
-            const LRegex = /(L[^A-Z]*)/gm
-            const QRegex = /(Q[^A-Z]*)/gm
-            const ZRegex = /(.[^Z]+)/gm
-            const points = myPath.split(' ')
-            const newPoints = points.filter((x, i) => i % 2 == 0)
-            // const newPath = newPoints.join(' ')
-            const newPath = myPath
-                .replace(MRegex, (s) => {
-                    const nums = s.substr(2).split(' ')
-                    const newNums = nums.map(n => n + (Math.random() * 100 - 50))
-                    const newStr = newNums.join(' ')
-                    return `M 10 10`
-                })
-                .replace(LRegex, (s) => {
-                    const nums = s.substr(2).split(' ')
-                    const newNums = nums.map(n => n + (Math.random() * 10 - 5))
-                    const newStr = newNums.join(' ')
-                    return `L 10 10`
-                })
-                .replace(QRegex, (s) => {
-                    const nums = s.substr(2).split(' ')
-                    const newNums = nums.map(n => n + (Math.random() * 10 - 5))
-                    const newStr = newNums.join(' ')
-                    return ``
-                })
-            // const newPath = myPath.split(ZRegex).slice(1).join('')
-            setPath('newPath')
-        } else {
-            setPath(mySVGJSON.path)
-        }
-        setClicked(clicked)
-    }
-
-    return (
-        <Box className={classes.mySVG} onClick={svgClick}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                <path className={classes.mySVGPath} d={myPath} />
-            </svg>
-        </Box>
-    )
-}
 
 export default App
