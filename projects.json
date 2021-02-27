@@ -51,7 +51,7 @@
             "url": "myanmarvr.com",
             "description":"Power Cuts are common in Myanmar. MVR Power allows paying customers to install a cheap ($20) android device in their home or office that remotely monitors power outages and remotely writes changes to a central MySQL database. The Power Status can then be viewed via the Web Dashboard showing a list of active devices and a map of the city. Email notifications are sent when there is a power outage and return, allowing users to judge when to return home and enjoy modern luxuries such as aircon and TV",
             "keywords":"Revenue Generating, Java, Android, PHP, JavaScript",
-            "logo":"http://myanmarvr.com/img/MVR%20Logo.png",
+            "logo":"MVRLogo",
             "gitUrl":"https://github.com/olibn333/MVR-Power",
             "shot": "shotMVRPower"
         }

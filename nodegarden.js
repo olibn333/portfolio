@@ -13,7 +13,8 @@ const MIN_DIST = SCREEN_HEIGHT / 5
 const SPRING_AMOUNT = 0.1
 const FRAMERATE = 1000 / 20
 const NODE_RADIUS = SCREEN_HEIGHT / 200
-const MAX_RADIUS = SCREEN_HEIGHT / 20
+const MAX_RADIUS = SCREEN_WIDTH / 50
+const MIN_RADIUS = SCREEN_WIDTH / 150
 const NEW_NODES_CLICK = 3
 const BOUNCE_FORCE = 0.9
 const RESISTANCE = 0.001
@@ -69,7 +70,7 @@ function nodes_init() {
 
     } else {
       const color = `255, 255, 255`
-    const radius = Math.floor(Math.random() * MAX_RADIUS)
+    const radius = clamp(Math.random()*MAX_RADIUS,MIN_RADIUS,MAX_RADIUS)
     const thisNewNodes = 5
       createNode(Math.floor(e.clientX), Math.floor(e.clientY), color, radius)
       createNode(Math.floor(e.clientX), Math.floor(e.clientY) + SPAWN_DIST, color, radius)
@@ -100,7 +101,7 @@ window.requestAnimationFrame(drawFrame)
 
 function drawText(text){
   
-  context.font = '48px Garamond';
+  context.font = '2.5rem EB Garamond';
   context.textAlign = 'center'
   context.textBaseline = 'middle'
   context.fillText(text, canvas.width/2, canvas.height/2);

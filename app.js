@@ -15,16 +15,17 @@ import shotMVRPower from './img/shot-MVRPower.png'
 import shotMVRWeb from './img/shot-MVRWeb.png'
 import shotPortfolio from './img/shot-Portfolio.png'
 import shotAddin from './img/shot-Addin.png'
+import MVRLogo from './img/MVRLogo.png'
 
-const logos = { OBN, MVRWebsite, shotHorde1, shotHorde2, shotMVRPower, shotMVRWeb, shotPortfolio, shotAddin, OngoLogo }
+const logos = { MVRLogo, OBN, MVRWebsite, shotHorde1, shotHorde2, shotMVRPower, shotMVRWeb, shotPortfolio, shotAddin, OngoLogo }
 
 // projectsList.projects.splice(4,0,[])
 
 const theme = createMuiTheme({
     typography: {
         fontFamily: [
-            'Garamond',
-        ].join(','),
+            'EB Garamond',
+        ].join(',')
     },
     palette: {
         type: 'dark',
@@ -53,7 +54,7 @@ const useStyles = makeStyles(() => ({
         textJustify: 'auto'
     },
     projectImg: {
-        height: '5em',
+        height: '4rem',
     },
     titleBox: {
         backgroundColor: 'grey'
@@ -62,7 +63,7 @@ const useStyles = makeStyles(() => ({
         float: 'right'
     },
     shotImg: {
-        height: '10em'
+        height: '8rem'
     }
 }))
 
@@ -90,11 +91,8 @@ const ProjectSpace = () => {
         <Box pt={2}>
 
             {clicked ?
-
-
                 <SpawnProjects />
                 : <Welcome handleClick={handleClick} />
-
             }
         </Box>
     )
@@ -132,7 +130,7 @@ const SpawnProjects = () => {
         <Fade in={show}>
             <Box height="80%" display="flex" >
                 {[0, 1].map(x => (
-                    <Grid key={x} ontainer direction="row" justify="center" spacing={2}>
+                    <Grid key={x} container direction="row" justify="center" spacing={2}>
                         {projectsList.projects.slice(x * 3, (x + 1) * 3).map(p => (
                             p.name &&
                             <Grid className={classes.gridCol} key={p.name} item xs={12}>
