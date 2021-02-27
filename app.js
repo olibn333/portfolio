@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Dialog, DialogTitle, AppBar, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade, Link, DialogContent, IconButton, List, ListItem } from '@material-ui/core'
 import * as mySVGJSON from './svg.json'
 import * as projectsList from './projects.json'
-import { Email, GitHub } from '@material-ui/icons'
+import { Email, GitHub, Person } from '@material-ui/icons'
 import CloseIcon from '@material-ui/icons/Close';
 import LinkIcon from '@material-ui/icons/Link';
 
@@ -268,10 +268,26 @@ const TabBar = () => {
                 <DialogContent>
                     <List>
                         <ListItem>
-                            <Email />
-                            <Typography>
-                                Oliver Belfitt-Nash
+                            <Person />
+                            <Box pl={1}>
+                                <Typography>
+                                    Oliver Belfitt-Nash
                             </Typography>
+                            </Box>
+                        </ListItem>
+                        <ListItem>
+                            <Email />
+                            <Box pl={1}>
+                                <Typography>
+                                    olibn333@gmail.com
+                            </Typography>
+                            </Box>
+                        </ListItem>
+                        <ListItem>
+                            <GitHub />
+                            <Box pl={1}>
+                                <Link href="https://github.com/olibn333">https://github.com/olibn333</Link>
+                            </Box>
                         </ListItem>
                     </List>
                 </DialogContent>
