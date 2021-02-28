@@ -225,7 +225,7 @@ const ProjectModal = ({ project, handleClose }) => {
                         </Box>
                     </ListItem>
                     <ListItem>
-                        <GitHub />
+                        <GitHubIcon />
                         <Box pl={2}>
                             <Link href={project.gitUrl}>{project.gitUrl}</Link>
                         </Box>
