@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Dialog, DialogTitle, Box, makeStyles, Typography, createMuiTheme, ThemeProvider, Tabs, Tab, Paper, Button, Grid, Fade, Link, DialogContent, IconButton, List, ListItem } from '@material-ui/core'
 import * as projectsList from './projects.json'
-import { Email, GitHub, Person } from '@material-ui/icons'
 import CloseIcon from '@material-ui/icons/Close';
 import LinkIcon from '@material-ui/icons/Link';
+import EmailIcon from '@material-ui/icons/Email';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import PersonIcon from '@material-ui/icons/Person';
 
 
 import OBN from './img/OBN.png'
@@ -264,7 +266,7 @@ const TabBar = () => {
                 <DialogContent>
                     <List>
                         <ListItem>
-                            <Person />
+                            <PersonIcon />
                             <Box pl={1}>
                                 <Typography>
                                     Oliver Belfitt-Nash
@@ -272,7 +274,7 @@ const TabBar = () => {
                             </Box>
                         </ListItem>
                         <ListItem>
-                            <Email />
+                            <EmailIcon />
                             <Box pl={1}>
                                 <Typography>
                                     olibn333@gmail.com
@@ -280,7 +282,7 @@ const TabBar = () => {
                             </Box>
                         </ListItem>
                         <ListItem>
-                            <GitHub />
+                            <GitHubIcon />
                             <Box pl={1}>
                                 <Link href="https://github.com/olibn333">https://github.com/olibn333</Link>
                             </Box>
